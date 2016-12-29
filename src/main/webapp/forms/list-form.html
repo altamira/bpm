@@ -1,0 +1,27 @@
+<script cam-script type="text/form-script">
+  camForm.on('form-loaded', function() {
+    // tell the form SDK to fetch the variable named 'pedido'
+    camForm.variableManager.fetchVariable('pedido');
+  });
+  camForm.on('variables-fetched', function() {
+    // work with the variable (bind it to the current AngularJS $scope)
+    $scope.pedido = camForm.variableManager.variableValue('pedido');
+  });
+</script>
+<form name="Pedido">
+  <div class="form-group">
+    <label for="numero">Pedido</label>
+    <input class="form-control"
+           cam-variable-type="Integer"
+           cam-variable-name="numero"
+           name="numero"
+           readonly="true" />
+  </div>
+  <div class="form-group">
+    <ul class="unstyled">
+      <li ng-repeat="item in pedido.material">
+        <input type="checkbox" ng-model="item.check"><span>{{item.code}}</span>{{item.description}}
+      </li>
+    </ul>
+  </div>    
+</form>
